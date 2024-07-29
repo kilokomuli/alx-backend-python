@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Test for client.GithubOrgClient class"""
 import unittest
+from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
 from client import (
     GithubOrgClient,
