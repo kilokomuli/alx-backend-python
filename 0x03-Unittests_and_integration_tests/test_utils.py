@@ -34,7 +34,6 @@ class TestAccessNestedMap(unittest.TestCase):
 
 class TestGetJson(unittest.TestCase):
     """Class module for unittest of get_json function."""
-    @patch('utils.requests.get')
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False}),
@@ -45,7 +44,7 @@ class TestGetJson(unittest.TestCase):
         patcher = patch('requests.get', **response)
         mock_get = patcher.start()
         self.assertEqual(get_json(test_url), test_payload)
-        mock_get.assert_called_once_with()
+        mock_get.assert_called_once()
         patcher.stop()
 
 
