@@ -30,9 +30,21 @@ class TestGithubOrgClient(unittest.TestCase):
              self.assertEqual(client._public_repos_url, expected_url)
         
     @patch('client.get_json')
-    def test_public_repos(self, mock_get_json):
+    def test_public_repos(self, mock_json):
         """Test GithubOrgClient.public_repos."""
-        
+        payloads = [{"name": "google"}, {"name": "Twitter"}]
+        mock_json.return_value = payloads
+
+        with patch('client.GithubOrgClient._public_repos_url') as mock_public:
+            mock_public.return_value = "hey there!"
+            test_class = GithubOrgClient('test')
+            result = test_class.public_repos()
+
+            expected = [p["name"] for p in payloads]
+            self.assertEqual(result, expected)
+
+            mock_json.called_with_once()
+            mock_public.called_with_once()
 
     @parameterized.expand([
         ({"license": {"key": "my_license"}}, "my_license", True),
@@ -40,9 +52,8 @@ class TestGithubOrgClient(unittest.TestCase):
     ])
     def test_has_license(self, repo, license_key, expected):
         """Test GithubOrgClient.has_license."""
-        self.assertEqual(GithubOrgClient.has_license(repo, license_key), expected)
-
-
+        result = GithubOrgClient.has_license(repo, license_key)
+        self.assertEqual(result, expected)
 
 
 if __name__ == "__main__":
