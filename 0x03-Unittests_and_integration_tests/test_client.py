@@ -55,6 +55,7 @@ class TestGithubOrgClient(unittest.TestCase):
         result = GithubOrgClient.has_license(repo, license_key)
         self.assertEqual(result, expected)
 
+
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """Integration test: fixtures class"""
     @classmethod
@@ -93,6 +94,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     def tearDownClass(cls):
         """Stops the patcher"""
         cls.get_patcher.stop()
+
 
 if __name__ == "__main__":
     unittest.main()
