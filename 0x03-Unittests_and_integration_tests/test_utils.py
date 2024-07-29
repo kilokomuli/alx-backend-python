@@ -10,7 +10,7 @@ from utils import (
 from unittest.mock import patch
 
 
-class TestAccessNestedMap(unittest.TestAccessNestedMap):
+class TestAccessNestedMap(unittest.TestCase):
     """Defines class that inherits from unittest.TestCase."""
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
