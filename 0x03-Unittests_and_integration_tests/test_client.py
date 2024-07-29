@@ -3,9 +3,7 @@
 import unittest
 from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
-from client import (
-    GithubOrgClient,
-)
+from client import (GithubOrgClient)
 from unittest.mock import patch, PropertyMock
 
 
@@ -57,6 +55,10 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(result, expected)
 
 
+@parameterized_class(
+    ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
+    TEST_PAYLOAD
+)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """Integration test: fixtures class"""
     @classmethod
